@@ -155,6 +155,13 @@ class TestCommands(unittest.TestCase):
         commands.Cd().execute(piped=["resources"])
         self.assertEqual(expected, os.getcwd())
         os.chdir(current_path)
+        
+    def test_pwd_after_cd(self):
+        current_path = os.path.abspath(os.getcwd())
+        expected = path.join(current_path, "resources")
+        commands.Cd().execute("resources")
+        self.assertEqual(expected, commands.Pwd().execute()[0])
+        os.chdir(current_path)    
 
     def test_cd_validator(self):
         self.assertRaises(commands.InvalidCommandArgumentsException, lambda: commands.Cd().execute("a", "b"))

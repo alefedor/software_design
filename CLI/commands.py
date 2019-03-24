@@ -236,7 +236,7 @@ class Pwd(Command, metaclass=Metaclass):
 
     @classmethod
     def __exec__(cls, _):
-        return os.path.dirname(os.path.realpath(__file__))
+        return os.path.abspath(os.getcwd())
 
 
 class Grep(Command, metaclass=Metaclass):
